@@ -1,0 +1,8 @@
+# 프로젝트 제외 경로
+/KeloBridge-Paper/.gradle/
+/KeloBridge-Paper/build/
+/KeloBridge-Velocity/.gradle/
+/KeloBridge-Velocity/build/
+/.idea/
+/build/
+*.jar
