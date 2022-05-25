@@ -15,6 +15,7 @@ import java.io.IOException
 
 
 object DevSend {
+    // 브리가디어 명령어 [유사 Kommand 모장 버전]
     fun register() : BrigadierCommand {
         val helloNode = LiteralArgumentBuilder
             .literal<CommandSource>("dev")
@@ -25,7 +26,8 @@ object DevSend {
                         val byteArray = ByteArrayOutputStream()
                         val out = DataOutputStream(byteArray)
                         try {
-                            out.writeUTF(data)
+                            out.writeUTF(data) // 일반 유니코드 문자열 전송, 종류에 따라 메소드 변경 가능.
+                            // 송,수신 데이터 순서 맞추기 필수
                         } catch (e: IOException) {
                             e.printStackTrace()
                         }
