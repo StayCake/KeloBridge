@@ -1,5 +1,5 @@
 {
-  "id":"kelocity", "name":"Kelocity", "version":"0.1-SNAPSHOT",
+  "id":"kelocity", "name":"Kelocity", "version":"0.2-SNAPSHOT",
   "description":"KeiKoi?", "url":"https://www.koisv.com", "authors":["KeiKoi"],
   "main": "com.koisv.kelocity.KeloCity"
 }

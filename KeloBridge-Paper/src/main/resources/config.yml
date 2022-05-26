@@ -1,0 +1,8 @@
+# 기본 게임모드 설정
+gameMode: SURVIVAL
+
+# OP 외 월드 수정 제한
+protectionMode: true
+
+# 플라이 허용
+flyAble: false

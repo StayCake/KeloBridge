@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.koisv"
-version = "0.1-SNAPSHOT"
+version = "0.2-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -13,9 +13,8 @@ repositories {
 
 dependencies {
     compileOnly(kotlin("stdlib"))
-    compileOnly("io.github.monun:kommand-api:2.10.0")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("com.github.stefvanschie.inventoryframework:IF:0.10.5")
+    implementation("com.github.stefvanschie.inventoryframework:IF:0.10.5")
 }
 
 tasks {

@@ -1,8 +1,7 @@
 package com.koisv.kelocity
 
 import com.google.inject.Inject
-import com.koisv.kelocity.command.DevSend
-import com.koisv.kelocity.listeners.DevTermListener
+import com.koisv.kelocity.commands.Server
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent
 import com.velocitypowered.api.plugin.Plugin
@@ -11,7 +10,7 @@ import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier
 import org.slf4j.Logger
 
 @Plugin(
-    id = "kelocity", name = "Kelocity", version = "0.1-SNAPSHOT",
+    id = "kelocity", name = "Kelocity", version = "0.2-SNAPSHOT",
     description = "KeiKoi?", url = "https://www.koisv.com", authors = ["KeiKoi"]
 ) // resources 폴더에다 velocity-plugin.json 작성 잊지 말기
 class KeloCity {
@@ -24,8 +23,8 @@ class KeloCity {
             private set
 
         // 네임스페이스:채널명 | namespace:channel -> 통신 채널 설정
-        val dev_In: MinecraftChannelIdentifier = MinecraftChannelIdentifier.create("kelocity","dev-man")
-        val dev_Out: MinecraftChannelIdentifier = MinecraftChannelIdentifier.create("kelocity","dev-sub")
+        val act_IN: MinecraftChannelIdentifier = MinecraftChannelIdentifier.create("kelocity","act-man")
+        val act_OUT: MinecraftChannelIdentifier = MinecraftChannelIdentifier.create("kelocity","act-sub")
     }
 
     @Inject
@@ -33,6 +32,7 @@ class KeloCity {
         instance = this
         server = Proxy
         logger = Logger
+
         Logger.info("Main Initialize Complete.")
     }
 
@@ -41,13 +41,13 @@ class KeloCity {
         logger.info("Starting Up...")
 
         // 테스트용 명령어
-        server.commandManager.register(DevSend.register())
+        server.commandManager.register(Server.register())
 
         // 메인 채널 등록
-        server.channelRegistrar.register(dev_In)
-        server.channelRegistrar.register(dev_Out)
+        server.channelRegistrar.register(act_IN)
+        server.channelRegistrar.register(act_OUT)
 
         // 채널 리스너 등록
-        server.eventManager.register(this, DevTermListener())
+        server.eventManager.register(this, PluginListener())
     }
 }
