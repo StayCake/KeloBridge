@@ -30,11 +30,13 @@ class ActTerminal : PluginMessageListener {
                     if (amount == 0) return
                     for (t in 1..amount) {
                         val online = receiver.readInt()
+                        val mods = receiver.readInt()
                         finalList.add(
                             ServerInfo(
                                 receiver.readBoolean(),
                                 receiver.readUTF(),
-                                if (online == -1) null else online
+                                if (online == -1) null else online,
+                                if (mods == -1) null else mods
                             )
                         )
                     }

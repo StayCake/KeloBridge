@@ -20,13 +20,11 @@ class Events : Listener {
         val joinTime = current.format(dateFormat)
         e.joinMessage(
             Component.text("[").color(TextColor.color(255,150,0))
-                .apply {
-                    append(Component.text("+")).color(TextColor.color(30,235,30)).hoverEvent(
-                        HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT, Component.text(joinTime))
-                    )
-                    append(Component.text("] ")).color(TextColor.color(255,150,0))
-                    append(Component.text((e.player.displayName() as TextComponent).content()))
-                }
+                .append(Component.text("+")).color(TextColor.color(30,235,30)).hoverEvent(
+                    HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT, Component.text(joinTime))
+                )
+                .append(Component.text("] ")).color(TextColor.color(255,150,0))
+                .append(Component.text((e.player.displayName() as TextComponent).content()))
         )
     }
 }

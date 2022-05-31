@@ -17,7 +17,8 @@ object ServerList {
     data class ServerInfo(
         val playerConnected: Boolean,
         val name: String,
-        val online: Int? = null
+        val online: Int?,
+        val mods: Int?,
     )
 
     fun serverMenu(data: List<ServerInfo>) : ChestGui {
@@ -33,6 +34,7 @@ object ServerList {
                     when {
                         (it.online != null && !current) -> Material.GREEN_CONCRETE
                         (it.online != null) -> Material.GRASS_BLOCK
+                        (it.mods != null) -> Material.CRAFTING_TABLE
                         else -> Material.RED_CONCRETE
                     },
                     if ((it.online ?: 1) > 64 || it.online == 0) 1 else it.online ?: 1
@@ -45,15 +47,25 @@ object ServerList {
                                 else TextColor.color(255,0,0)
                             ).decoration(TextDecoration.ITALIC,false),
                         ))
-                        if (it.playerConnected) {
-                            lore(lore()?.apply {
+                        lore(lore()?.apply {
+                            if (it.playerConnected) {
                                 add(
                                     Component.text("현재 접속 중")
                                         .color(TextColor.color(0, 200, 200))
                                         .decoration(TextDecoration.ITALIC, false)
                                 )
-                            })
-                        }
+                            }
+                            if (it.mods != null) {
+                                add(
+                                    Component.text("모드 ")
+                                        .color(TextColor.color(255,180,0))
+                                        .decoration(TextDecoration.ITALIC, false)
+                                        .append(Component.text(it.mods)
+                                            .color(TextColor.color(105,180,90)))
+                                        .append(Component.text("개"))
+                                )
+                            }
+                        })
                     }
                 }
             ) { e ->
