@@ -32,9 +32,10 @@ object ServerList {
             val serverIcon = GuiItem(
                 ItemStack(
                     when {
-                        (it.online != null && !current) -> Material.GREEN_CONCRETE
-                        (it.online != null) -> Material.GRASS_BLOCK
-                        (it.mods != null) -> Material.CRAFTING_TABLE
+                        (it.online != null && it.mods == null && !current) -> Material.GREEN_CONCRETE
+                        (it.online != null && it.mods == null) -> Material.GRASS_BLOCK
+                        (it.online != null && !current) -> Material.ANVIL
+                        (it.online != null) -> Material.CRAFTING_TABLE
                         else -> Material.RED_CONCRETE
                     },
                     if ((it.online ?: 1) > 64 || it.online == 0) 1 else it.online ?: 1
