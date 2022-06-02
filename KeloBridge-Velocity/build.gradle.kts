@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.koisv"
-version = "0.3-SNAPSHOT"
+version = "0.31-SNAPSHOT"
 
 repositories {
     mavenCentral()

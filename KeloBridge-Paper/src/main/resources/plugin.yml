@@ -1,6 +1,6 @@
 name: KeloPaper
 main: com.koisv.kelopaper.KeloPaper
-version: 0.3-SNAPSHOT
+version: 0.32-SNAPSHOT
 api-version: 1.18
 author: StayCake
 libraries:

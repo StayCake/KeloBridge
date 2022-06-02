@@ -17,11 +17,12 @@ object ServerList {
     data class ServerInfo(
         val playerConnected: Boolean,
         val name: String,
+        val version: String?,
         val online: Int?,
         val mods: Int?,
     )
 
-    fun serverMenu(data: List<ServerInfo>) : ChestGui {
+    fun serverMenu(data: List<ServerInfo>, req: Player) : ChestGui {
         val lineSize = ceil((data.size.toDouble()) / 9).toInt()
         val menu = ChestGui(lineSize, "서버 선택")
         val menuPane = StaticPane(9, lineSize)
@@ -41,7 +42,11 @@ object ServerList {
                     if ((it.online ?: 1) > 64 || it.online == 0) 1 else it.online ?: 1
                 ).apply {
                     itemMeta = itemMeta.apply {
-                        displayName(Component.text(name).decoration(TextDecoration.ITALIC,false))
+                        displayName(
+                            if (req.protocolVersion < 393)
+                                Component.text("§f$name")
+                            else Component.text(name).decoration(TextDecoration.ITALIC,false)
+                        )
                         lore(listOf(
                             Component.text(online).color(
                                 if (it.online != null) TextColor.color(255,255,255)
@@ -53,6 +58,13 @@ object ServerList {
                                 add(
                                     Component.text("현재 접속 중")
                                         .color(TextColor.color(0, 200, 200))
+                                        .decoration(TextDecoration.ITALIC, false)
+                                )
+                            }
+                            if (it.version != null) {
+                                add(
+                                    Component.text(it.version)
+                                        .color(TextColor.color(255,125,255))
                                         .decoration(TextDecoration.ITALIC, false)
                                 )
                             }

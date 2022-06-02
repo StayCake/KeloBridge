@@ -10,7 +10,7 @@ import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier
 import org.slf4j.Logger
 
 @Plugin(
-    id = "kelocity", name = "Kelocity", version = "0.3-SNAPSHOT",
+    id = "kelocity", name = "Kelocity", version = "0.31-SNAPSHOT",
     description = "KeiKoi?", url = "https://www.koisv.com", authors = ["KeiKoi"]
 ) // resources 폴더에다 velocity-plugin.json 작성 잊지 말기
 class KeloCity {

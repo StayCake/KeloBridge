@@ -31,16 +31,18 @@ class ActTerminal : PluginMessageListener {
                     for (t in 1..amount) {
                         val online = receiver.readInt()
                         val mods = receiver.readInt()
+                        val version = receiver.readUTF()
                         finalList.add(
                             ServerInfo(
                                 receiver.readBoolean(),
                                 receiver.readUTF(),
+                                if (version == "<none>") null else version,
                                 if (online == -1) null else online,
-                                if (mods == -1) null else mods
+                                if (mods == -1) null else mods,
                             )
                         )
                     }
-                    victim?.let { ServerList.serverMenu(finalList).show(it) }
+                    victim?.let { ServerList.serverMenu(finalList, victim).show(it) }
                 }
             }
         } catch ( e: IOException ) {

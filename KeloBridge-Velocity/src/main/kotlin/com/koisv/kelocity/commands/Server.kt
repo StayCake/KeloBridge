@@ -37,8 +37,10 @@ object Server {
                     for (i in KeloCity.server.allServers) {
                         val modInfo = if (pingData[i]?.modinfo?.isPresent == true) pingData[i]?.modinfo?.get() else null
                         val playerInfo = if (pingData[i]?.players?.isPresent == true) pingData[i]?.players?.get() else null
+                        val versionInfo = if (pingData[i]?.version != null) pingData[i]?.version?.name else null
                         outputStream.writeInt(playerInfo?.online ?: -1)
                         outputStream.writeInt(modInfo?.mods?.size ?: -1)
+                        outputStream.writeUTF(versionInfo ?: "<none>")
                         outputStream.writeBoolean((it.source as Player).currentServer.get().server == i)
                         outputStream.writeUTF(i.serverInfo.name)
                     }
