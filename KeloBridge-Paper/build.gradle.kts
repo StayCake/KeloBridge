@@ -14,7 +14,7 @@ repositories {
 dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    implementation("com.github.stefvanschie.inventoryframework:IF:0.10.5")
+    implementation("com.github.stefvanschie.inventoryframework:IF:0.10.6")
 }
 
 tasks {

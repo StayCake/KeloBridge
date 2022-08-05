@@ -8,6 +8,7 @@ import com.velocitypowered.api.command.CommandSource
 import com.velocitypowered.api.proxy.Player
 import com.velocitypowered.api.proxy.server.RegisteredServer
 import com.velocitypowered.api.proxy.server.ServerPing
+import net.kyori.adventure.text.Component
 import java.io.ByteArrayOutputStream
 import java.io.DataOutputStream
 import java.io.IOException
@@ -19,6 +20,7 @@ object Server {
         val helloNode = LiteralArgumentBuilder
             .literal<CommandSource>("s")
             .executes {
+                it.source.sendMessage(Component.text("서버 상태 확인 중, 잠시만 기다려 주세요..."))
                 val byteArray = ByteArrayOutputStream()
                 val outputStream = DataOutputStream(byteArray)
                 try {
@@ -28,7 +30,7 @@ object Server {
                     val pingData = mutableMapOf<RegisteredServer, ServerPing?>()
                     for (i in KeloCity.server.allServers) {
                         try {
-                            val data = i.ping().orTimeout(50L, TimeUnit.MILLISECONDS).get()
+                            val data = i.ping().orTimeout(100L, TimeUnit.MILLISECONDS).get()
                             pingData[i] = data
                         } catch (e: Exception) {
                             pingData[i] = null
