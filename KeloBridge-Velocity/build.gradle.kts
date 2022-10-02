@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.koisv"
-version = "0.32-SNAPSHOT"
+version = "0.331-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:3.0.1")
-    annotationProcessor("com.velocitypowered:velocity-api:3.0.1")
+    compileOnly("com.velocitypowered:velocity-api:3.1.2-SNAPSHOT")
+    annotationProcessor("com.velocitypowered:velocity-api:3.1.2-SNAPSHOT")
     implementation(kotlin("stdlib"))
     implementation("com.mojang:brigadier:1.0.18")
 }

@@ -51,13 +51,15 @@ class PluginListener {
 
     @Subscribe
     fun kickMessage(e: KickedFromServerEvent) {
-        if (e.kickedDuringServerConnect())
-            e.player.sendMessage(prefix.append(Component.text(
+        try {
+            if (e.kickedDuringServerConnect())
+                e.player.sendMessage(prefix.append(Component.text(
                     "접속하려던 서버에 문제가 발생했습니다 : ${(e.serverKickReason.get() as TextComponent).content()}"
-            )))
-        else e.player.sendMessage(prefix.append(Component.text(
+                )))
+            else e.player.sendMessage(prefix.append(Component.text(
                 "접속중인 서버에 문제가 발생했습니다 : ${(e.serverKickReason.get() as TextComponent).content()}"
-        )))
+            )))
+        } catch (_: Exception) { }
     }
 
     @Subscribe
@@ -85,7 +87,7 @@ class PluginListener {
             val curServer = e.player.currentServer.get()
             KeloCity.server.allPlayers.forEach {
                 it.sendMessage(Component.text(
-                    "[+] [${curServer.serverInfo.name}] - ${e.player.username}"
+                    "[-] [${curServer.serverInfo.name}] - ${e.player.username}"
                 ))
             }
         }
