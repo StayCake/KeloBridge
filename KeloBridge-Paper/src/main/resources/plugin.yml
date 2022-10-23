@@ -1,8 +1,8 @@
 name: KeloPaper
 main: com.koisv.kelopaper.KeloPaper
-version: 0.32-SNAPSHOT
-api-version: 1.18
+version: 0.4-SNAPSHOT
+api-version: 1.19
 author: StayCake
 libraries:
-  - org.jetbrains.kotlin:kotlin-stdlib:1.6.21
-  - com.github.stefvanschie.inventoryframework:IF:0.10.5
+  - org.jetbrains.kotlin:kotlin-stdlib:1.7.20
+  - com.github.stefvanschie.inventoryframework:IF:0.10.7

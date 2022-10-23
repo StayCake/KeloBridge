@@ -2,6 +2,7 @@
 
 package com.koisv.kelocity
 
+import com.koisv.kelocity.KeloCity.Companion.kickedServers
 import com.koisv.kelocity.managers.PlayerManager
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.DisconnectEvent
@@ -38,15 +39,15 @@ class PluginListener {
         val arrayData = e.data
         val target = e.identifier.id
         val receiver = DataInputStream(ByteArrayInputStream(arrayData))
-        try {
-            when (receiver.readUTF()) {
-                "PlayerSend" ->
-                    if (target.startsWith("kelocity:act"))
-                        PlayerManager.send(receiver.readUTF(),receiver.readUTF())
+        if (target.startsWith("kelocity:act"))
+            try {
+                when (receiver.readUTF()) {
+                    "PlayerSend" ->
+                        PlayerManager.send(receiver.readUTF(), receiver.readUTF())
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
     }
 
     @Subscribe
@@ -56,9 +57,12 @@ class PluginListener {
                 e.player.sendMessage(prefix.append(Component.text(
                     "접속하려던 서버에 문제가 발생했습니다 : ${(e.serverKickReason.get() as TextComponent).content()}"
                 )))
-            else e.player.sendMessage(prefix.append(Component.text(
-                "접속중인 서버에 문제가 발생했습니다 : ${(e.serverKickReason.get() as TextComponent).content()}"
-            )))
+            else {
+                e.player.sendMessage(prefix.append(Component.text(
+                    "접속중인 서버에 문제가 발생했습니다 : ${(e.serverKickReason.get() as TextComponent).content()}"
+                )))
+                kickedServers[e.player] = e.server
+            }
         } catch (_: Exception) { }
     }
 
@@ -90,6 +94,7 @@ class PluginListener {
                     "[-] [${curServer.serverInfo.name}] - ${e.player.username}"
                 ))
             }
+            kickedServers.remove(e.player)
         }
     }
 }
